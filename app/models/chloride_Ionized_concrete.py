@@ -29,6 +29,17 @@ class ChlorideIonizedConcreteItem(BaseModel):
         populate_by_name = True
 
 
+class ChlorideIonizedConcreteItemFormat(ChlorideIonizedConcreteItem):
+    """氯離子混凝土建築物資料項目（含經緯度）"""
+
+    longitude: float = Field(description="經度")
+    latitude: float = Field(description="緯度")
+
+
+class ChlorideIonizedConcreteFormatResponse(BaseModel):
+    result: List[ChlorideIonizedConcreteItemFormat] = Field(description="查詢結果列表")
+
+
 class ChlorideIonizedConcreteResult(BaseModel):
     """氯離子混凝土查詢結果"""
 

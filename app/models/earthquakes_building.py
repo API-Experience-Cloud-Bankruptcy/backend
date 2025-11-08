@@ -26,6 +26,23 @@ class EarthquakeBuildingItem(BaseModel):
         populate_by_name = True
 
 
+class EarthquakeBuildingItemGeoList(BaseModel):
+    """地震建築物資料項目經緯度列表"""
+
+    longitude: float = Field(description="經度")
+    latitude: float = Field(description="緯度")
+
+
+class EarthquakeBuildingItemFormat(EarthquakeBuildingItem):
+    """地震建築物資料項目（含經緯度）"""
+
+    geo: list[EarthquakeBuildingItemGeoList] = Field(description="經緯度資訊")
+
+
+class EarthquakeBuildingFormatResponse(BaseModel):
+    result: List[EarthquakeBuildingItemFormat] = Field(description="查詢結果列表")
+
+
 class EarthquakeBuildingResult(BaseModel):
     """地震建築物查詢結果"""
 
