@@ -1,3 +1,7 @@
+
+
+
+
 from fastapi import APIRouter, HTTPException, Query
 from typing import List
 from app.handler.todaywork import TodayWorkHandler
@@ -6,6 +10,7 @@ from app.handler.properties import PropertiesHandler
 from app.handler.earthquake_building import EarthquakeBuildingHandler
 from app.handler.chloride_ionized_concrete import ChlorideIonizedConcreteHandler
 from app.handler.earthquake_building_geojson import EarthquakeBuildingGeoJSONHandler
+from app.handlers.urban_update_handler import UrbanUpdateHandler
 from app.handler.chloride_ionized_concrete_geojson import (
     ChlorideIonizedConcreteGeoJSONHandler,
 )
@@ -28,6 +33,7 @@ from app.models.chloride_ionized_concrete_geojson import (
 )
 
 api_router = APIRouter()
+
 
 todaywork_handler = TodayWorkHandler()
 work_diagram_handler = WorkDiagramHandler()
@@ -345,5 +351,11 @@ async def get_chloride_ionized_concrete_geojson():
     """獲取所有海砂屋建築物的 GeoJSON 資料"""
     return await chloride_ionized_concrete_geojson_handler.fetch_geojson()
 
+@api_router.get("/urban-update")
+async def urban_update():
+    return urban_update_handler.get_urban_updates()
 
+@api_router.get("/urban-update/{district}")
+async def urban_update_by_district(district: str):
+    return urban_update_handler.get_urban_update_by_district(district)
 __all__ = ["api_router"]

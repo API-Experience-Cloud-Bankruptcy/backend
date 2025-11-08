@@ -36,6 +36,7 @@ Desktop.ini
 
 # Thumbnail cache files
 ._*
+Thumbs.db.DS_Store
 Thumbs.db
 
 
