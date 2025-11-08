@@ -1,4 +1,4 @@
-from models.todaywork import WorkFeatureCollection, WorkFeature
+from app.models.todaywork import WorkFeatureCollection, WorkFeature
 import httpx
 
 API_URL = "https://tpnco.blob.core.windows.net/blobfs/Todaywork.json"

@@ -19,25 +19,26 @@ class WorkProperties(BaseModel):
     ce_da: str = Field(alias="Ce_Da", description="施工結束日期")
     co_ti: str = Field(alias="Co_Ti", description="施工時間")
 
-    @field_serializer('app_time', 'cb_da', 'ce_da')
+    @field_serializer("app_time", "cb_da", "ce_da")
     def serialize_datetime(self, value: str) -> str:
         """將台灣民國日期時間轉換為 ISO 8601 格式"""
         if not value:
             return value
 
         try:
-            # 處理 "108/01/18 14:59:06" 格式
-            if ' ' in value:
-                date_part, time_part = value.split(' ')
-                year, month, day = date_part.split('/')
-                # 民國年轉西元年
+            if " " in value:
+                date_part, time_part = value.split(" ")
+                year, month, day = date_part.split("/")
+
                 year = int(year) + 1911
-                dt = datetime.strptime(f"{year}/{month}/{day} {time_part}", "%Y/%m/%d %H:%M:%S")
+                dt = datetime.strptime(
+                    f"{year}/{month}/{day} {time_part}", "%Y/%m/%d %H:%M:%S"
+                )
                 return dt.isoformat()
-            # 處理 "114/10/06" 格式（僅日期）
-            elif '/' in value:
-                year, month, day = value.split('/')
-                # 民國年轉西元年
+
+            elif "/" in value:
+                year, month, day = value.split("/")
+
                 year = int(year) + 1911
                 dt = datetime.strptime(f"{year}/{month}/{day}", "%Y/%m/%d")
                 return dt.date().isoformat()
@@ -45,6 +46,7 @@ class WorkProperties(BaseModel):
             pass
 
         return value
+
     tc_na: str = Field(alias="Tc_Na", description="施工廠商名稱")
     tc_ma: str = Field(alias="Tc_Ma", description="施工廠商負責人")
     tc_tl: str = Field(alias="Tc_Tl", description="施工廠商電話")
@@ -58,7 +60,7 @@ class WorkProperties(BaseModel):
     plan_b: str = Field(alias="PlanB", description="替代計畫")
     w_item: str = Field(alias="WItem", description="施工項目")
     positions_type: str = Field(alias="Positions_type", description="位置類型")
-    positions: List[List[List[float]]] = Field(
+    positions: Union[List[List[List[float]]], List[List[List[List[float]]]]] = Field(
         alias="Positions", description="位置座標陣列"
     )
 

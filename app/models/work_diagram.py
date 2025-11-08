@@ -25,6 +25,10 @@ class ImportDate(BaseModel):
 
         return value
 
+    class Config:
+        populate_by_name = True
+        json_encoders = {datetime: lambda v: v.isoformat() if v else None}
+
 
 class WorkProject(BaseModel):
     id: int = Field(alias="_id", description="ID")
@@ -59,9 +63,14 @@ class WorkProject(BaseModel):
 
         return value
 
-    class Config:
-        populate_by_name = True
+
+class WorkProjectResult(BaseModel):
+    limit: int = Field(description="限制數量")
+    offset: int = Field(description="偏移量")
+    count: int = Field(description="總數")
+    sort: str = Field(description="排序")
+    results: List[WorkProject] = Field(description="工程專案列表")
 
 
 class WorkProjectResponse(BaseModel):
-    results: List[WorkProject] = Field(description="工程專案列表")
+    result: WorkProjectResult = Field(description="結果資料")
