@@ -1,0 +1,232 @@
+{
+    "result": [
+        {
+            "id": 1,
+            "import_date": {
+                "date": "2025-10-09 17:41:12.614221",
+                "timezone_type": 3,
+                "timezone": "Asia/Taipei"
+            },
+            "county": "臺北市",
+            "county_code": "63000",
+            "item_number": "1",
+            "organizer": "臺北市政府衛生局(臺北市立聯合醫院)",
+            "district": "南港區",
+            "district_code": "115",
+            "building_name": "忠孝院區醫療大樓行政大樓",
+            "purpose": "醫院",
+            "building_location": "南港區同德路87號",
+            "longitude": 121.586152995744,
+            "latitude": 25.046511001441
+        },
+        {
+            "id": 2,
+            "import_date": {
+                "date": "2025-10-09 17:41:12.627550",
+                "timezone_type": 3,
+                "timezone": "Asia/Taipei"
+            },
+            "county": "臺北市",
+            "county_code": "63000",
+            "item_number": "2",
+            "organizer": "臺北市政府衛生局(臺北市立聯合醫院)",
+            "district": "信義區",
+            "district_code": "110",
+            "building_name": "松德院區第ㄧ院區醫療大樓",
+            "purpose": "醫院",
+            "building_location": "信義區松德路309號",
+            "longitude": 121.574885035667,
+            "latitude": 25.030479982975
+        },
+        {
+            "id": 3,
+            "import_date": {
+                "date": "2025-10-09 17:41:12.629065",
+                "timezone_type": 3,
+                "timezone": "Asia/Taipei"
+            },
+            "county": "臺北市",
+            "county_code": "63000",
+            "item_number": "3",
+            "organizer": "臺北市政府衛生局(臺北市立聯合醫院)",
+            "district": "信義區",
+            "district_code": "110",
+            "building_name": "松德院區第五院區醫療大樓",
+            "purpose": "醫院",
+            "building_location": "信義區松德路401號",
+            "longitude": 121.574436017114,
+            "latitude": 25.02952297918
+        },
+        {
+            "id": 4,
+            "import_date": {
+                "date": "2025-10-09 17:41:12.630699",
+                "timezone_type": 3,
+                "timezone": "Asia/Taipei"
+            },
+            "county": "臺北市",
+            "county_code": "63000",
+            "item_number": "4",
+            "organizer": "臺北市政府衛生局(臺北市立聯合醫院)",
+            "district": "中正區",
+            "district_code": "100",
+            "building_name": "和平婦幼院區 (和平)醫療大樓",
+            "purpose": "醫院",
+            "building_location": "中正區中華路2段33號",
+            "longitude": 121.506708982171,
+            "latitude": 25.035591979993
+        },
+        {
+            "id": 5,
+            "import_date": {
+                "date": "2025-10-09 17:41:12.631962",
+                "timezone_type": 3,
+                "timezone": "Asia/Taipei"
+            },
+            "county": "臺北市",
+            "county_code": "63000",
+            "item_number": "5",
+            "organizer": "臺北市政府社會局 臺北市立陽明教養院",
+            "district": "士林區",
+            "district_code": "111",
+            "building_name": "永福之家",
+            "purpose": "教養機構",
+            "building_location": "士林區莊頂路2號",
+            "longitude": 121.54954897312,
+            "latitude": 25.110846005897
+        },
+        {
+            "id": 6,
+            "import_date": {
+                "date": "2025-10-09 17:41:12.633250",
+                "timezone_type": 3,
+                "timezone": "Asia/Taipei"
+            },
+            "county": "臺北市",
+            "county_code": "63000",
+            "item_number": "6",
+            "organizer": "臺北市政府社會局 臺北市立浩然敬老院",
+            "district": "北投區",
+            "district_code": "112",
+            "building_name": "致中樓及致和樓",
+            "purpose": "老人安養暨長期照顧機構",
+            "building_location": "臺北市北投區知行路75號",
+            "longitude": 121.467856011106,
+            "latitude": 25.118367003798
+        },
+        {
+            "id": 7,
+            "import_date": {
+                "date": "2025-10-09 17:41:12.634762",
+                "timezone_type": 3,
+                "timezone": "Asia/Taipei"
+            },
+            "county": "臺北市",
+            "county_code": "63000",
+            "item_number": "7",
+            "organizer": "臺北市政府教育局(臺北市立圖書館) 臺北市政府財政局(臺北市動產質借處)",
+            "district": "松山區",
+            "district_code": "105",
+            "building_name": "松山綜合大樓",
+            "purpose": "合署辦公大樓",
+            "building_location": "松山區八德路4段688號",
+            "longitude": 121.576882024099,
+            "latitude": 25.049842011672
+        },
+        {
+            "id": 8,
+            "import_date": {
+                "date": "2025-10-09 17:41:12.636061",
+                "timezone_type": 3,
+                "timezone": "Asia/Taipei"
+            },
+            "county": "臺北市",
+            "county_code": "63000",
+            "item_number": "8",
+            "organizer": "臺北市政府警察局",
+            "district": "士林區",
+            "district_code": "111",
+            "building_name": "士林分局 永福派出所",
+            "purpose": "辦公廳舍",
+            "building_location": "士林區仰德大道三段49號",
+            "longitude": 121.552341990896,
+            "latitude": 25.118435986861
+        },
+        {
+            "id": 9,
+            "import_date": {
+                "date": "2025-10-09 17:41:12.637408",
+                "timezone_type": 3,
+                "timezone": "Asia/Taipei"
+            },
+            "county": "臺北市",
+            "county_code": "63000",
+            "item_number": "9",
+            "organizer": "臺北市政府產業發展局(臺北市市場處)",
+            "district": "中山區",
+            "district_code": "104",
+            "building_name": "民族魚市",
+            "purpose": "批發市場",
+            "building_location": "中山區民族東路四段410巷2弄20號",
+            "longitude": 121.536732959345,
+            "latitude": 25.066672998977
+        },
+        {
+            "id": 10,
+            "import_date": {
+                "date": "2025-10-09 17:41:12.638875",
+                "timezone_type": 3,
+                "timezone": "Asia/Taipei"
+            },
+            "county": "臺北市",
+            "county_code": "63000",
+            "item_number": "10",
+            "organizer": "臺北市政府產業發展局(臺北市市場處)",
+            "district": "中山區",
+            "district_code": "104",
+            "building_name": "八德市場",
+            "purpose": "零售市場",
+            "building_location": "中山區八德路二段108-1號",
+            "longitude": 121.536226021841,
+            "latitude": 25.045833995121
+        },
+        {
+            "id": 11,
+            "import_date": {
+                "date": "2025-10-09 17:41:12.640473",
+                "timezone_type": 3,
+                "timezone": "Asia/Taipei"
+            },
+            "county": "臺北市",
+            "county_code": "63000",
+            "item_number": "11",
+            "organizer": "臺北市政府產業發展局(臺北市市場處)",
+            "district": "文山區",
+            "district_code": "116",
+            "building_name": "永建市場大樓",
+            "purpose": "超市、區民活動中心、圖書館、親子館暨托嬰中心",
+            "building_location": "臺北市文山區木柵路1段177號",
+            "longitude": 121.55103097742,
+            "latitude": 24.987807001447
+        },
+        {
+            "id": 12,
+            "import_date": {
+                "date": "2025-10-09 17:41:12.642031",
+                "timezone_type": 3,
+                "timezone": "Asia/Taipei"
+            },
+            "county": "臺北市",
+            "county_code": "63000",
+            "item_number": "12",
+            "organizer": "臺北市政府體育局",
+            "district": "南港區",
+            "district_code": "115",
+            "building_name": "玉成公園游泳池",
+            "purpose": "游泳池",
+            "building_location": "南港區中坡南路55號",
+            "longitude": 121.585750412934,
+            "latitude": 25.041864200049
+        }
+    ]
+}

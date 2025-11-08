@@ -37,3 +37,23 @@ Desktop.ini
 # Thumbnail cache files
 ._*
 Thumbs.db.DS_Store
+Thumbs.db
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[codz]
+*$py.class
+
+# C extensions
+*.so
+
+# Environments
+.env
+.envrc
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
