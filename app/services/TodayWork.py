@@ -28,13 +28,5 @@ async def fetch_today_work() -> list[WorkFeature]:
                 f"Failed to parse JSON data at position {error_pos}"
             ) from e
 
-        col = WorkFeatureCollection.model_validate(data)
-        return col.features
-
-
-if __name__ == "__main__":
-    import asyncio
-
-    features = asyncio.run(fetch_today_work())
-    for feature in features:
-        print(feature)
+        convert_col = WorkFeatureCollection.from_wrong_format(data)
+        return convert_col.features
