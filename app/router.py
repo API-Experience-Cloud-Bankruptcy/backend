@@ -10,6 +10,7 @@ from app.handlers.urban_update_handler import UrbanUpdateHandler
 from app.handler.chloride_ionized_concrete_geojson import (
     ChlorideIonizedConcreteGeoJSONHandler,
 )
+from app.handler.house_hunt import HouseHuntHandler
 from app.models.todaywork import WorkFeatureCollection
 from app.models.work_diagram import WorkProject
 from app.models.properties import FeatureCollection
@@ -27,6 +28,7 @@ from app.models.earthquake_building_geojson import (
 from app.models.chloride_ionized_concrete_geojson import (
     ChlorideIonizedConcreteFeatureCollection,
 )
+from app.models.house_hunt import HouseFeatureCollection
 
 api_router = APIRouter()
 
@@ -39,6 +41,7 @@ chloride_ionized_concrete_handler = ChlorideIonizedConcreteHandler()
 earthquake_building_geojson_handler = EarthquakeBuildingGeoJSONHandler()
 chloride_ionized_concrete_geojson_handler = ChlorideIonizedConcreteGeoJSONHandler()
 urban_update_handler = UrbanUpdateHandler()
+house_hunt_handler = HouseHuntHandler()
 
 
 @api_router.get(
@@ -394,11 +397,25 @@ async def urban_update_nearby(
     - **longitude**: 經度 (WGS84)
     - **radius**: 搜索半徑（公里），範圍 0.1 ~ 10.0，預設 1.0
 
-    範例：台北市政府附近 1 公里
+    範例:台北市政府附近 1 公里
     - latitude: 25.0330
     - longitude: 121.5654
     """
     return urban_update_handler.get_nearby_updates(latitude, longitude, radius)
+
+
+@api_router.get(
+    "/house-hunt/nearby",
+    response_model=HouseFeatureCollection,
+    tags=["房屋獵人"],
+    response_model_by_alias=False,
+)
+async def house_hunt_nearby(
+    latitude: float = Query(..., description="緯度", example=25.0330),
+    longitude: float = Query(..., description="經度", example=121.5654),
+    radius: float = Query(1.0, description="搜索半徑（公里）", ge=0.1, le=10.0),
+):
+    return await house_hunt_handler.get_nearby_houses(latitude, longitude, radius)
 
 
 __all__ = ["api_router"]
