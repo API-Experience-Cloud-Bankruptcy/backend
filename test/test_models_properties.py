@@ -1,4 +1,4 @@
-from app.models.properties import Feature
+from app.models.properties import FeatureCollection
 
 TESTDATA = {
     "type": "FeatureCollection",
@@ -33,11 +33,11 @@ TESTDATA = {
 
 
 def test_feature_model():
-    feature_data = TESTDATA["features"][0]
-    feature = Feature(**feature_data)
-
+    feature_collection = FeatureCollection(**TESTDATA)
+    assert feature_collection.type == "FeatureCollection"
+    assert len(feature_collection.features) == 1
+    feature = feature_collection.features[0]
     assert feature.type == "Feature"
-    assert feature.properties.stroke_color == "#FF0000"
-    assert feature.properties.stroke_width == 3
+    assert feature.properties.id == "1281"
     assert feature.geometry.type == "Polygon"
-    assert len(feature.geometry.coordinates) == 1
+    assert len(feature.geometry.coordinates[0]) == 6
