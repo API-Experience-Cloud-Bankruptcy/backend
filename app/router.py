@@ -80,6 +80,26 @@ async def get_work_by_contractor(contractor: str = Query(...)):
 
 
 @api_router.get(
+    "/todaywork/nearby",
+    response_model=WorkFeatureCollection,
+    tags=["今日施工"],
+    response_model_by_alias=False,
+)
+async def get_work_nearby(
+    latitude: float = Query(..., description="緯度", example=25.0330),
+    longitude: float = Query(..., description="經度", example=121.5654),
+    radius: float = Query(1.0, description="搜索半徑（公里）", ge=0.1),
+):
+    result = await todaywork_handler.fetch_work_nearby(latitude, longitude, radius)
+    if not result.features:
+        raise HTTPException(
+            status_code=404,
+            detail=f"在座標 ({latitude}, {longitude}) 半徑 {radius} 公里內查無施工資料",
+        )
+    return result
+
+
+@api_router.get(
     "/projects",
     response_model=List[WorkProject],
     tags=["工程專案"],
@@ -349,14 +369,36 @@ async def get_chloride_ionized_concrete_geojson():
     return await chloride_ionized_concrete_geojson_handler.fetch_geojson()
 
 
-@api_router.get("/urban-update")
+@api_router.get("/urban-update", tags=["都市更新"])
 async def urban_update():
     return urban_update_handler.get_urban_updates()
 
 
-@api_router.get("/urban-update/{district}")
+@api_router.get("/urban-update/{district}", tags=["都市更新"])
 async def urban_update_by_district(district: str):
     return urban_update_handler.get_urban_update_by_district(district)
+
+
+@api_router.get("/urban-update/nearby/search", tags=["都市更新"])
+async def urban_update_nearby(
+    latitude: float = Query(..., description="緯度", example=25.0330),
+    longitude: float = Query(..., description="經度", example=121.5654),
+    radius: float = Query(1.0, description="搜索半徑（公里）", ge=0.1),
+):
+    """
+    搜索指定座標附近的都市更新案件
+
+    使用 Shapely 空間索引進行高效搜索
+
+    - **latitude**: 緯度 (WGS84)
+    - **longitude**: 經度 (WGS84)
+    - **radius**: 搜索半徑（公里），範圍 0.1 ~ 10.0，預設 1.0
+
+    範例：台北市政府附近 1 公里
+    - latitude: 25.0330
+    - longitude: 121.5654
+    """
+    return urban_update_handler.get_nearby_updates(latitude, longitude, radius)
 
 
 __all__ = ["api_router"]

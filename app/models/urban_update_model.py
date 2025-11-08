@@ -1,5 +1,5 @@
 from typing import List, Optional
-from pydantic import BaseModel, Field, computed_field
+from pydantic import BaseModel, Field
 
 class UrbanRecord(BaseModel):
     date: Optional[str] = Field(None, description="資料日期")
@@ -26,11 +26,11 @@ class UrbanUpdateResponse(BaseModel):
     status: str = Field(..., description="回傳狀態 (success / empty / error)")
     districts: str = Field(..., description="行政區名稱")
     records: List[UrbanRecord] = Field(default_factory=list, description="更新紀錄")
+    record_count: int = Field(default=0, description="記錄數量")
 
-    @computed_field
-    @property
-    def record_count(self) -> int:
-        return len(self.records)
+    def __init__(self, **data):
+        super().__init__(**data)
+        self.record_count = len(self.records)
 
     class Config:
         populate_by_name = True
@@ -39,6 +39,11 @@ class UrbanUpdateResponse(BaseModel):
 class UrbanUpdateListResponse(BaseModel):
     status: str = Field(..., description="回傳狀態 (success / empty / error)")
     data: List[UrbanUpdateResponse] = Field(default_factory=list)
+    total_count: int = Field(default=0, description="總數量")
+
+    def __init__(self, **data):
+        super().__init__(**data)
+        self.total_count = len(self.data)
 
     class Config:
         populate_by_name = True
