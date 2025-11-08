@@ -5,6 +5,10 @@ from app.handler.work_diagram import WorkDiagramHandler
 from app.handler.properties import PropertiesHandler
 from app.handler.earthquake_building import EarthquakeBuildingHandler
 from app.handler.chloride_ionized_concrete import ChlorideIonizedConcreteHandler
+from app.handler.earthquake_building_geojson import EarthquakeBuildingGeoJSONHandler
+from app.handler.chloride_ionized_concrete_geojson import (
+    ChlorideIonizedConcreteGeoJSONHandler,
+)
 from app.models.todaywork import WorkFeatureCollection
 from app.models.work_diagram import WorkProject
 from app.models.properties import FeatureCollection
@@ -16,6 +20,12 @@ from app.models.chloride_Ionized_concrete import (
     ChlorideIonizedConcreteResponse,
     ChlorideIonizedConcreteItem,
 )
+from app.models.earthquake_building_geojson import (
+    EarthquakeBuildingFeatureCollection,
+)
+from app.models.chloride_ionized_concrete_geojson import (
+    ChlorideIonizedConcreteFeatureCollection,
+)
 
 api_router = APIRouter()
 
@@ -24,6 +34,8 @@ work_diagram_handler = WorkDiagramHandler()
 properties_handler = PropertiesHandler()
 earthquake_building_handler = EarthquakeBuildingHandler()
 chloride_ionized_concrete_handler = ChlorideIonizedConcreteHandler()
+earthquake_building_geojson_handler = EarthquakeBuildingGeoJSONHandler()
+chloride_ionized_concrete_geojson_handler = ChlorideIonizedConcreteGeoJSONHandler()
 
 
 @api_router.get(
@@ -312,6 +324,26 @@ async def get_chloride_ionized_concrete_by_organizer(organizer: str = Query(...)
             detail=f"查無主辦單位為「{organizer}」的海砂屋建築物資料",
         )
     return result
+
+
+@api_router.get(
+    "/geojson/earthquake-buildings",
+    response_model=EarthquakeBuildingFeatureCollection,
+    tags=["GeoJSON - 地震建築物"],
+)
+async def get_earthquake_buildings_geojson():
+    """獲取所有地震建築物的 GeoJSON 資料"""
+    return await earthquake_building_geojson_handler.fetch_geojson()
+
+
+@api_router.get(
+    "/geojson/chloride-ionized-concrete",
+    response_model=ChlorideIonizedConcreteFeatureCollection,
+    tags=["GeoJSON - 海砂屋"],
+)
+async def get_chloride_ionized_concrete_geojson():
+    """獲取所有海砂屋建築物的 GeoJSON 資料"""
+    return await chloride_ionized_concrete_geojson_handler.fetch_geojson()
 
 
 __all__ = ["api_router"]
