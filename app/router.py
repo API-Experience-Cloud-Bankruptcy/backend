@@ -1,7 +1,3 @@
-
-
-
-
 from fastapi import APIRouter, HTTPException, Query
 from typing import List
 from app.handler.todaywork import TodayWorkHandler
@@ -42,6 +38,7 @@ earthquake_building_handler = EarthquakeBuildingHandler()
 chloride_ionized_concrete_handler = ChlorideIonizedConcreteHandler()
 earthquake_building_geojson_handler = EarthquakeBuildingGeoJSONHandler()
 chloride_ionized_concrete_geojson_handler = ChlorideIonizedConcreteGeoJSONHandler()
+urban_update_handler = UrbanUpdateHandler()
 
 
 @api_router.get(
@@ -351,11 +348,15 @@ async def get_chloride_ionized_concrete_geojson():
     """獲取所有海砂屋建築物的 GeoJSON 資料"""
     return await chloride_ionized_concrete_geojson_handler.fetch_geojson()
 
+
 @api_router.get("/urban-update")
 async def urban_update():
     return urban_update_handler.get_urban_updates()
 
+
 @api_router.get("/urban-update/{district}")
 async def urban_update_by_district(district: str):
     return urban_update_handler.get_urban_update_by_district(district)
+
+
 __all__ = ["api_router"]
