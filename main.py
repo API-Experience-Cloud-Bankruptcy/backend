@@ -1,9 +1,8 @@
 from app.main import app
 from dotenv import load_dotenv
-import os
+
 
 load_dotenv()
-os.makedirs("data", exist_ok=True)
 if __name__ == "__main__":
     import uvicorn
 
