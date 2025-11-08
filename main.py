@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-os.mkdir("data", exist_ok=True)
+os.makedirs("data", exist_ok=True)
 if __name__ == "__main__":
     import uvicorn
 
