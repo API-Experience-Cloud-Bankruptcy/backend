@@ -1,11 +1,29 @@
+from datetime import datetime
 from typing import List
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_serializer
 
 
 class ImportDate(BaseModel):
     date: str = Field(description="匯入日期時間")
     timezone_type: int = Field(description="時區類型")
     timezone: str = Field(description="時區")
+
+    @field_serializer("date")
+    def serialize_date(self, value: str) -> str:
+        if not value:
+            return value
+
+        try:
+            dt = datetime.strptime(value, "%Y-%m-%d %H:%M:%S.%f")
+            return dt.isoformat()
+        except ValueError:
+            try:
+                dt = datetime.strptime(value, "%Y-%m-%d %H:%M:%S")
+                return dt.isoformat()
+            except ValueError:
+                pass
+
+        return value
 
 
 class WorkProject(BaseModel):
@@ -23,6 +41,23 @@ class WorkProject(BaseModel):
     )
     longitude: str = Field(alias="工程位置－經度", description="工程位置經度")
     latitude: str = Field(alias="工程位置－緯度", description="工程位置緯度")
+
+    @field_serializer("start_date", "expected_completion_date")
+    def serialize_roc_date(self, value: str) -> str:
+        """將台灣民國日期轉換為 ISO 8601 格式"""
+        if not value:
+            return value
+
+        try:
+            year, month, day = value.split(".")
+
+            year = int(year) + 1911
+            dt = datetime.strptime(f"{year}/{month}/{day}", "%Y/%m/%d")
+            return dt.date().isoformat()
+        except (ValueError, AttributeError):
+            pass
+
+        return value
 
     class Config:
         populate_by_name = True

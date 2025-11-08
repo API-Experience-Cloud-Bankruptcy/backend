@@ -74,3 +74,31 @@ def test_work_project_response_model():
     assert first_project.contract_amount_thousand == "2217900"
     assert first_project.longitude == "121.5079785"
     assert first_project.latitude == "25.02265781"
+
+
+def test_datetime_iso8601_conversion():
+    """測試時間轉換為 ISO 8601 格式"""
+    response = WorkProjectResponse(**TEST_DATA["result"])
+
+    # 將模型序列化為 JSON
+    json_data = response.model_dump()
+
+    project1 = json_data["results"][0]
+    project2 = json_data["results"][1]
+    project3 = json_data["results"][2]
+
+    # 驗證匯入日期轉換：2025-08-04 18:23:30.374419 -> 2025-08-04T18:23:30.374419
+    assert project1["import_date"]["date"] == "2025-08-04T18:23:30.374419"
+    assert project2["import_date"]["date"] == "2025-08-04T18:23:30.385858"
+    assert project3["import_date"]["date"] == "2025-08-04T18:23:30.387190"
+
+    # 驗證開工日期轉換：108.05.06 -> 2019-05-06
+    assert project1["start_date"] == "2019-05-06"
+    assert project2["start_date"] == "2020-02-17"
+    assert project3["start_date"] == "2019-07-29"
+
+    # 驗證預定完成日期轉換：114.11.29 -> 2025-11-29
+    assert project1["expected_completion_date"] == "2025-11-29"
+    assert project2["expected_completion_date"] == "2025-10-10"
+    assert project3["expected_completion_date"] == "2026-04-30"
+
