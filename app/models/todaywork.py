@@ -123,13 +123,25 @@ class WorkFeature(BaseModel):
     properties: WorkProperties
 
     @classmethod
-    def from_wrong_format(cls, wrong_feature: Dict[str, Any]) -> "WorkFeature":
+    def from_wrong_format(cls, wrong_feature: Dict[str, Any]) -> "WorkFeature | None":
         properties = dict(wrong_feature.get("properties", {}))
         geometry = wrong_feature.get("geometry", {})
 
         if "Positions" in properties and "Positions_type" in properties:
             positions_type = properties.pop("Positions_type")
             positions = properties.pop("Positions")
+
+            if positions_type == "MultiPoint":
+                return None
+
+            if positions_type in [
+                "LineString",
+                "MultiLineString",
+                "Polygon",
+                "MultiPolygon",
+            ]:
+                if isinstance(positions, list) and len(positions) == 1:
+                    return None
 
             transformed_coords = transform_coordinates(positions, positions_type)
 
@@ -176,10 +188,11 @@ class WorkFeatureCollection(BaseModel):
             return wrong_geojson
 
         if isinstance(wrong_geojson, dict):
-            features = [
-                WorkFeature.from_wrong_format(f)
-                for f in wrong_geojson.get("features", [])
-            ]
+            features: List[WorkFeature] = []
+            for f in wrong_geojson.get("features", []):
+                feature = WorkFeature.from_wrong_format(f)
+                if feature is not None:
+                    features.append(feature)
             return cls(type="FeatureCollection", features=features)
 
         raise TypeError(
